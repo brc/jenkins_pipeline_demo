@@ -4,8 +4,13 @@ pipeline {
     agent any
     stages {
         stage('Build') {
+            agent {
+                docker 'maven'
+            }
             steps {
-                echo "It's building!"
+                sh 'mvn -h'
+                sh 'ls -l /.dockerenv || true'
+                sh 'cat /proc/1/cgroup'
             }
         }
     }
