@@ -8,9 +8,8 @@ pipeline {
                 docker 'maven'
             }
             steps {
-                sh 'mvn -h'
-                sh 'ls -l /.dockerenv || true'
-                sh 'cat /proc/1/cgroup'
+                /* https://issues.jenkins-ci.org/browse/JENKINS-33510 */
+                sh 'cd demo && mvn -B clean validate compile package'
             }
         }
     }
